@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CampusEventProject</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="submit">Submit</string>
+
+    <!-- Create Event Strings & Hints -->
+    <string name="createEvent">Create New Event</string>
+    <string name="eventName">Event Name:</string>
+    <string name="eventUniversity">University:</string>
+    <string name="eventCategory">Category:</string>
+    <string name="eventLocation">Location:</string>
+    <string name="eventCreated">Created By:</string>
+    <string name="eventDate">Date:</string>
+    <string name="eventDetails">Details:</string>
+
+
+</resources>
