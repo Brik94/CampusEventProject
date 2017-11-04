@@ -28,12 +28,14 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
         detailsEdit = (EditText) findViewById(R.id.detailsEdit);
 
 
-
-
+        //Creates Button Object, then sets a Listener for when the user clicks the button.
         submit = (Button) findViewById(R.id.submitButton);
         submit.setOnClickListener(this);
     }
 
+    /**
+     * This method is called when a user clicks the submit button.
+     */
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.submitButton){
