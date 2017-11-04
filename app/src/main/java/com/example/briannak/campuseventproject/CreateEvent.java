@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.briannak.campuseventproject.Objects.Event;
@@ -25,10 +27,14 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
     AutoCompleteTextView campusEdit;
     String name, university, category, date, details;
     Button submit;
+    Spinner spinnerCategory;
 
     //Dummy String array. Will be replaced by an ArrayList<Campus> objects.
     private static final String[] COLLEGES = new String[] {
-            "UNCH", "UNCC", "DUKE", "DUUKE", "Spain"
+            "UNCH", "UNCC", "DUKE", "DUUKE", "Spain"};
+
+    private static final String[] CATEGORIES = new String[] {
+            "Academic", "Athletic", "Community Service", "Computing", "Arts", "Social", "Religious", "Greek"
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +44,23 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
         //Initialize EditText which is used to Input userdata.
         eventNameEdit = (EditText) findViewById(R.id.eventNameEdit);
         campusEdit = (AutoCompleteTextView) findViewById(R.id.campusEdit);
-        categoryEdit = (EditText) findViewById(R.id.categoryEdit);
         dateEdit = (EditText) findViewById(R.id.dateEdit);
         detailsEdit = (EditText) findViewById(R.id.detailsEdit);
+        spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
 
 
         //Creates a dropdown menu of Campus Suggestions based on user input.
         //Currently references Dummy String. Will be replaced by an ArrayList<Campus> objects.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, COLLEGES);
         campusEdit.setAdapter(adapter);
+
+
+        //Spinner or 'Category DropDown List' Logic
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(categoryAdapter);
+
 
 
         //Creates Button Object, then sets a Listener for when the user clicks the button.
@@ -65,7 +79,7 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
             //Get Text that was submitted into each section.
             name = eventNameEdit.getText().toString();
             university = campusEdit.getText().toString();
-            category = categoryEdit.getText().toString();
+            category = spinnerCategory.getSelectedItem().toString();
             date = dateEdit.getText().toString();
             details = detailsEdit.getText().toString();
 

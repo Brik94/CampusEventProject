@@ -14,4 +14,17 @@
     <string name="eventDetails">Details:</string>
 
 
+
+    <string-array name="category_array">
+        <item>Academic</item>
+        <item>Athletic</item>
+        <item>Arts</item>
+        <item>Community Service</item>
+        <item>Computing</item>
+        <item>Social</item>
+        <item>Religious</item>
+        <item>Greek</item>
+    </string-array>
+
+
 </resources>

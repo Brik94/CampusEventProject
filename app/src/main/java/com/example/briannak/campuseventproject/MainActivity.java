@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<Event> totalEvents;
     private ArrayList<Campus> colleges;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
