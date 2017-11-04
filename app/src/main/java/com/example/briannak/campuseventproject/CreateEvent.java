@@ -18,7 +18,7 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
 
-        //Initialize EditText
+        //Initialize EditText which is used to Input userdata.
         eventNameEdit = (EditText) findViewById(R.id.eventNameEdit);
         universityEdit = (EditText) findViewById(R.id.universityEdit);
         categoryEdit = (EditText) findViewById(R.id.categoryEdit);
@@ -37,7 +37,9 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.submitButton){
-            //Get Text
+            Intent i = new Intent();
+
+            //Get Text that was submitted into each section.
             name = eventNameEdit.getText().toString();
             university = universityEdit.getText().toString();
             category = categoryEdit.getText().toString();
@@ -46,11 +48,12 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
             date = dateEdit.getText().toString();
             details = detailsEdit.getText().toString();
 
-
-
-            Intent i = new Intent();
-            
+            //Create Event Object based on user data.
             Event newEvent = new Event(name, university, category, location, createdBy, date, details);
+
+
+
+
         }
     }
 }
