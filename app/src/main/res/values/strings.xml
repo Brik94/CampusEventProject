@@ -6,7 +6,7 @@
     <!-- Create Event Strings & Hints -->
     <string name="createEvent">Create New Event</string>
     <string name="eventName">Event Name:</string>
-    <string name="eventUniversity">University:</string>
+    <string name="eventCampus">Campus:</string>
     <string name="eventCategory">Category:</string>
     <string name="eventLocation">Location:</string>
     <string name="eventCreated">Created By:</string>

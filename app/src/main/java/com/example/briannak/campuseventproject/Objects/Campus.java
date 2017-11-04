@@ -3,14 +3,15 @@ package com.example.briannak.campuseventproject.Objects;
 import java.util.ArrayList;
 
 /**
- * Created by BriannaK on 11/4/2017.
+ * Defines a Campus Object.
+ * May need to be refined.
  */
 
-public class University {
+public class Campus {
     public String name, location;
     public ArrayList<Event> events;
 
-    public University(String name, String location){
+    public Campus(String name, String location){
         this.name = name;
         this.location = location;
     }

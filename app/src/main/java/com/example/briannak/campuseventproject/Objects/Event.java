@@ -6,19 +6,18 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 /**
- * Created by BriannaK on 11/4/2017.
+ * Defines and Event object.
+ * Go Back and add in a Picture
  */
 
 public class Event implements Serializable, Parcelable {
-    private String name, university, category, location, createdBy, date, details;
+    private String name, university, category, date, details;
 
 
-    public Event(String name, String university, String category, String location, String createdBy, String date, String details) {
+    public Event(String name, String university, String category, String date, String details) {
         this.name = name;
         this.university = university;
         this.category = category;
-        this.location = location;
-        this.createdBy = createdBy;
         this.date = date;
         this.details = details;
     }
@@ -27,8 +26,6 @@ public class Event implements Serializable, Parcelable {
         name = in.readString();
         university = in.readString();
         category = in.readString();
-        location = in.readString();
-        createdBy = in.readString();
         date = in.readString();
         details = in.readString();
     }
@@ -55,9 +52,18 @@ public class Event implements Serializable, Parcelable {
         dest.writeString(name);
         dest.writeString(university);
         dest.writeString(category);
-        dest.writeString(location);
-        dest.writeString(createdBy);
         dest.writeString(date);
         dest.writeString(details);
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", university='" + university + '\'' +
+                ", category='" + category + '\'' +
+                ", date='" + date + '\'' +
+                ", details='" + details + '\'' +
+                '}';
     }
 }

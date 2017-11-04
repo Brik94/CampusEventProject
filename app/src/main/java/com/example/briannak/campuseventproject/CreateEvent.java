@@ -1,18 +1,35 @@
 package com.example.briannak.campuseventproject;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.briannak.campuseventproject.Objects.Event;
 
+/**
+ * Handles input submitted into the create_event layout.
+ * Takes data and creates a new Event object.
+ * Sends this object back to the MainActivity, where it is stored in an ArrayList.
+ */
 public class CreateEvent extends AppCompatActivity  implements View.OnClickListener{
-    EditText eventNameEdit, universityEdit, categoryEdit, locationEdit, createdByEdit, dateEdit, detailsEdit;
-    String name, university, category, location, createdBy, date, details;
+    EditText eventNameEdit, categoryEdit, dateEdit, detailsEdit;
+    AutoCompleteTextView campusEdit;
+    String name, university, category, date, details;
     Button submit;
+
+    //Dummy String array. Will be replaced by an ArrayList<Campus> objects.
+    private static final String[] COLLEGES = new String[] {
+            "UNCH", "UNCC", "DUKE", "DUUKE", "Spain"
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +37,16 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
 
         //Initialize EditText which is used to Input userdata.
         eventNameEdit = (EditText) findViewById(R.id.eventNameEdit);
-        universityEdit = (EditText) findViewById(R.id.universityEdit);
+        campusEdit = (AutoCompleteTextView) findViewById(R.id.campusEdit);
         categoryEdit = (EditText) findViewById(R.id.categoryEdit);
-        locationEdit = (EditText) findViewById(R.id.locationEdit);
-        createdByEdit = (EditText) findViewById(R.id.createdEdit);
         dateEdit = (EditText) findViewById(R.id.dateEdit);
         detailsEdit = (EditText) findViewById(R.id.detailsEdit);
+
+
+        //Creates a dropdown menu of Campus Suggestions based on user input.
+        //Currently references Dummy String. Will be replaced by an ArrayList<Campus> objects.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, COLLEGES);
+        campusEdit.setAdapter(adapter);
 
 
         //Creates Button Object, then sets a Listener for when the user clicks the button.
@@ -43,19 +64,35 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
 
             //Get Text that was submitted into each section.
             name = eventNameEdit.getText().toString();
-            university = universityEdit.getText().toString();
+            university = campusEdit.getText().toString();
             category = categoryEdit.getText().toString();
-            location = locationEdit.getText().toString();
-            createdBy = createdByEdit.getText().toString();
             date = dateEdit.getText().toString();
             details = detailsEdit.getText().toString();
 
-            //Create Event Object based on user data.
-            Event newEvent = new Event(name, university, category, location, createdBy, date, details);
-
-
-
-
+            if (validateDate()) { //If Necessary fields are filled..
+                //Create Event Object based on user data.
+                Event newEvent = new Event(name, university, category, date, details);
+                Log.d("testEvent", newEvent.toString());
+                //Returns this event object to the MainActivity.
+                i.putExtra(MainActivity.RETURNED_EVENT, (Parcelable) newEvent);
+                setResult(RESULT_OK, i);
+                finish();
+            }
         }
+    }
+
+    //This method is used to validate user data.
+    //Ex: Make sure an input isn't null or makes sure the user ACTUALLY typed in data.
+    public boolean validateDate(){
+
+        //Submits an error message if a field is empty
+        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(university) || TextUtils.isEmpty(category) || TextUtils.isEmpty(date)){
+            CharSequence text = "Please make sure all input is filled in.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(CreateEvent.this, text, duration);
+            toast.show();
+            return false;
+        }
+        return true;
     }
 }

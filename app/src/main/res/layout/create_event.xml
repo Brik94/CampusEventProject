@@ -18,56 +18,40 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/universityEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/eventNameEdit"
-        android:layout_marginTop="26dp"
-        android:ems="10"
-        android:hint="@string/eventUniversity"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="67dp" />
-
-    <EditText
         android:id="@+id/eventNameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="@string/eventName"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="130dp" />
+        tools:layout_editor_absoluteY="130dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/dateEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/universityEdit"
-        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="@string/eventDate"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_below="@+id/campusEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:id="@+id/categoryEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/dateEdit"
-        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="@string/eventCategory"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/createdEdit"
@@ -113,5 +97,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/categoryEdit"
         android:text="@string/submit" />
+
+    <AutoCompleteTextView
+        android:id="@+id/campusEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/eventCampus"
+        android:completionThreshold="1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/eventNameEdit"
+        android:layout_marginTop="23dp"
+        android:layout_alignRight="@+id/eventNameEdit"
+        android:layout_alignEnd="@+id/eventNameEdit" />
 
 </RelativeLayout>
