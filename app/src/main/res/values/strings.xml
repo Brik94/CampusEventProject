@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">CampusEventProject</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="submit">Submit</string>
     <string name="category">Category: </string>
@@ -19,8 +18,16 @@
     <string name="eventDate">Date:</string>
     <string name="eventDetails">Details:</string>
 
+    <string name="app_name">SCE APP</string>
+    <string name="login_email_activity">Email</string>
+    <string name="login_password_activity">Password</string>
+    <string name="signup_email_activity">Email</string>
+    <string name="signup_password_activity">Password</string>
+    <string name="signup_school_activity">School</string>
+
 
     <string-array name="category_array">
+        <item>Choose a Category</item>
         <item>Academic</item>
         <item>Athletic</item>
         <item>Arts</item>
@@ -30,6 +37,6 @@
         <item>Religious</item>
         <item>Greek</item>
     </string-array>
-
+    <string name="title_activity_login_page">LoginPage</string>
 
 </resources>

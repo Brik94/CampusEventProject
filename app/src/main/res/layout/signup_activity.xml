@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/signuptextView"
+        android:layout_width="383dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/signupEmail"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="19dp"
+        android:text="Create Account"
+        android:textAlignment="center"
+        android:textSize="70px"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="99dp" />
+
+    <EditText
+        android:id="@+id/signupEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="216dp"
+        android:ems="10"
+        android:hint="@string/signup_email_activity"
+        android:inputType="text"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="185dp" />
+
+    <EditText
+        android:id="@+id/signupPassword"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="241dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/signupEmail"
+        android:layout_alignStart="@+id/signupEmail"
+        android:layout_below="@+id/signupEmail"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="@string/signup_password_activity"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="210dp"
+        android:layout_height="32dp"
+        android:layout_alignEnd="@+id/signupPassword"
+        android:layout_alignLeft="@+id/signupPassword"
+        android:layout_alignRight="@+id/signupPassword"
+        android:layout_alignStart="@+id/signupPassword"
+        android:layout_below="@+id/signupPassword"
+        android:layout_marginTop="11dp"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:text="Sign Up" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="79dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Create Account"
+        android:textAlignment="center"
+        android:textSize="70px" />
+
+
+</RelativeLayout>

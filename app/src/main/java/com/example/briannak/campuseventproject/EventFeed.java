@@ -2,6 +2,7 @@ package com.example.briannak.campuseventproject;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -47,6 +49,7 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
     public static final String REQ_EVENT = "newEvent";
     public final static String EVENT_LIST = "eventList";
     public final static String CAMPUS_LIST = "campusList";
+    public final static String OBJECT = "objects";
     private FloatingActionButton createEvent;
     TextView test;
 
@@ -79,7 +82,7 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
         artsList = new ArrayList<>();
 
 
-        Event event1 = new Event();
+        /*Event event1 = new Event();
         event1.setName("Block Party");
         event1.setDate("10/11/2017");
         totalEvents.add(event1);
@@ -92,14 +95,19 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
         Event event3 = new Event();
         event3.setName("Thanksgiving Bash");
         event3.setDate("11/24/2017");
-        totalEvents.add(event3);
+        totalEvents.add(event3);*/
+
 
 
         try {
             parseCollegeFile();
+            parseEventFile();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        sortEvents();
 
         //Creates a dropdown menu of Campus Suggestions based on user input.
         //Currently references Dummy String. Will be replaced by an ArrayList<Campus> objects.
@@ -139,6 +147,15 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
         ArrayAdapter<Event> customAdapter = new CustomListAdapter(this, 0 , totalEvents);
         listView.setAdapter(customAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent myIntent = new Intent(EventFeed.this, EventInfo.class);
+                myIntent.putExtra(OBJECT, (Parcelable) totalEvents.get(i));
+                startActivity(myIntent);
+            }
+        });
+
     }
 
     /**
@@ -174,7 +191,7 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
             x++;
         } else if (x == 1) {
             search.setImageResource(R.drawable.search);
-            searchBar.setVisibility(View.INVISIBLE);
+            searchBar.setVisibility(View.GONE);
 
             try {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -212,7 +229,7 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
                     }
                 }
                 ListView listView = (ListView) findViewById(R.id.listV);
-                ArrayAdapter<EventObject> customAdapter2 = new CustomListAdapter(this, 0, hold);
+                ArrayAdapter<Event> customAdapter2 = new CustomListAdapter(this, 0, hold);
                 listView.setAdapter(customAdapter2);
             } else {
                 ListView listView = (ListView) findViewById(R.id.listV);
@@ -248,6 +265,35 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
             reader.close();
         }
         Log.d("test", "DONE loading buildings.");
+    }
+
+    public void parseEventFile() throws IOException {
+        Log.d("test", "Loading txt file data...");
+        final Resources resources = this.getResources();
+        InputStream inputStream = resources.openRawResource(R.raw.events);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        try
+        {
+            String line, name, campus, category, date, details;
+            while ((line = reader.readLine()) != null)
+            {
+                String[] strings = TextUtils.split(line, ",");
+                name = strings[0];
+                campus = strings[1];
+                date  = strings[2];
+                category  = strings[3];
+                details =  strings[4];
+
+
+                totalEvents.add(new Event(name,campus, category, date, details));
+            }
+        }
+        finally
+        {
+            reader.close();
+        }
+        Log.d("test", "DONE loading events.");
     }
 
     public void parseFile(String fileName) throws IOException {
@@ -309,7 +355,7 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
                     athleticList.add(returnedEvent);
                 }else if(returnedEvent.getCategory().equals("Community Service")){
                     communityList.add(returnedEvent);
-                }else if(returnedEvent.getCategory().equals("Computing")){
+                }else if(returnedEvent.getCategory().equals("Technology")){
                     computingList.add(returnedEvent);
                 }else if(returnedEvent.getCategory().equals("Arts")){
                     artsList.add(returnedEvent);
@@ -317,6 +363,25 @@ public class EventFeed extends AppCompatActivity implements View.OnClickListener
 
             }else if (resultCode == RESULT_CANCELED){
                 Log.d("eventListender", "Create event cancelled");
+            }
+        }
+    }
+
+    public void sortEvents(){
+        for(int i = 0; i < totalEvents.size(); i++){
+            Log.d("Tester",totalEvents.get(i).toString());
+            if(totalEvents.get(i).category == null) {
+
+            }else if(totalEvents.get(i).category.equals("Academic")){
+                academicList.add(totalEvents.get(i));
+            }else if(totalEvents.get(i).category.equals("Athletic")){
+                athleticList.add(totalEvents.get(i));
+            }else if(totalEvents.get(i).category.equals("Community Service")){
+                communityList.add(totalEvents.get(i));
+            }else if(totalEvents.get(i).category.equals("Technology")){
+                computingList.add(totalEvents.get(i));
+            }else if(totalEvents.get(i).category.equals("Arts")){
+                artsList.add(totalEvents.get(i));
             }
         }
     }

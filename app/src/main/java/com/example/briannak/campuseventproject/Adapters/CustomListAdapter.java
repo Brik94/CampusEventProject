@@ -64,4 +64,18 @@ public class CustomListAdapter extends ArrayAdapter{
 
         return view;
     }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        View v = null;
+        if (position == 0) {
+            TextView tv = new TextView(getContext());
+            tv.setVisibility(View.GONE);
+            v = tv;
+        } else {
+            v = super.getDropDownView(position, null, parent);
+        }
+        return v;
+    }
+
 }

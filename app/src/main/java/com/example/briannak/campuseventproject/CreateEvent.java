@@ -37,7 +37,7 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
             "UNCH", "UNCC", "DUKE", "DUUKE", "Spain"};
 
     private static final String[] CATEGORIES = new String[] {
-            "Academic", "Athletic", "Community Service", "Computing", "Arts", "Social", "Religious", "Greek"
+            "Choose a Category","Academic", "Athletic", "Community Service", "Computing", "Arts", "Social", "Religious", "Greek"
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
     public boolean validateDate(){
 
         //Submits an error message if a field is empty
-        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(university) || TextUtils.isEmpty(category) || TextUtils.isEmpty(date)){
+        if(TextUtils.isEmpty(name) || TextUtils.isEmpty(university) || TextUtils.isEmpty(category) || TextUtils.isEmpty(date) || spinnerCategory.getSelectedItem().toString().equals("Choose a Category")){
             CharSequence text = "Please make sure all input is filled in.";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(CreateEvent.this, text, duration);
