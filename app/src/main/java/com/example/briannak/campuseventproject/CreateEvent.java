@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -15,12 +14,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.briannak.campuseventproject.Objects.Campus;
 import com.example.briannak.campuseventproject.Objects.Event;
+
+import java.util.ArrayList;
 
 /**
  * Handles input submitted into the create_event layout.
  * Takes data and creates a new Event object.
- * Sends this object back to the MainActivity, where it is stored in an ArrayList.
+ * Sends this object back to the EventFeed, where it is stored in an ArrayList.
  */
 public class CreateEvent extends AppCompatActivity  implements View.OnClickListener{
     EditText eventNameEdit, categoryEdit, dateEdit, detailsEdit;
@@ -28,6 +30,7 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
     String name, university, category, date, details;
     Button submit;
     Spinner spinnerCategory;
+    ArrayList<Campus> campuses;
 
     //Dummy String array. Will be replaced by an ArrayList<Campus> objects.
     private static final String[] COLLEGES = new String[] {
@@ -47,6 +50,9 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
         dateEdit = (EditText) findViewById(R.id.dateEdit);
         detailsEdit = (EditText) findViewById(R.id.detailsEdit);
         spinnerCategory = (Spinner) findViewById(R.id.spinnerCategory);
+        campuses = (ArrayList<Campus>) getIntent().getSerializableExtra(EventFeed.CAMPUS_LIST);
+
+
 
 
         //Creates a dropdown menu of Campus Suggestions based on user input.
@@ -63,10 +69,14 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
 
 
 
+
+
         //Creates Button Object, then sets a Listener for when the user clicks the button.
         submit = (Button) findViewById(R.id.submitButton);
         submit.setOnClickListener(this);
     }
+
+
 
     /**
      * This method is called when a user clicks the submit button.
@@ -87,8 +97,8 @@ public class CreateEvent extends AppCompatActivity  implements View.OnClickListe
                 //Create Event Object based on user data.
                 Event newEvent = new Event(name, university, category, date, details);
                 Log.d("testEvent", newEvent.toString());
-                //Returns this event object to the MainActivity.
-                i.putExtra(MainActivity.RETURNED_EVENT, (Parcelable) newEvent);
+                //Returns this event object to the EventFeed.
+                i.putExtra(EventFeed.REQ_EVENT, (Parcelable) newEvent);
                 setResult(RESULT_OK, i);
                 finish();
             }

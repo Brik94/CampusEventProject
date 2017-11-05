@@ -2,6 +2,12 @@
     <string name="app_name">CampusEventProject</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="submit">Submit</string>
+    <string name="category">Category: </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
     <!-- Create Event Strings & Hints -->
     <string name="createEvent">Create New Event</string>
@@ -12,7 +18,6 @@
     <string name="eventCreated">Created By:</string>
     <string name="eventDate">Date:</string>
     <string name="eventDetails">Details:</string>
-
 
 
     <string-array name="category_array">

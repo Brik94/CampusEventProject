@@ -10,9 +10,26 @@ import java.io.Serializable;
  * Go Back and add in a Picture
  */
 
-public class Event implements Serializable, Parcelable {
-    private String name, university, category, date, details;
+public class Event implements Serializable, Parcelable, Cloneable {
+    public String name, university, category, date, details;
+    int highlight;
 
+    public Event() {
+        name = null;
+        university = null;
+        category = null;
+        date = null;
+        details = null;
+        highlight = 0;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getDetails() {
+        return details;
+    }
 
     public Event(String name, String university, String category, String date, String details) {
         this.name = name;
@@ -20,6 +37,7 @@ public class Event implements Serializable, Parcelable {
         this.category = category;
         this.date = date;
         this.details = details;
+        highlight = 0;
     }
 
     protected Event(Parcel in) {
@@ -42,9 +60,22 @@ public class Event implements Serializable, Parcelable {
         }
     };
 
+    public int getHighlight() {
+        return highlight;
+    }
+
+    public void setHighlight(int highlight) {
+        this.highlight = highlight;
+    }
+
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override
@@ -65,5 +96,37 @@ public class Event implements Serializable, Parcelable {
                 ", date='" + date + '\'' +
                 ", details='" + details + '\'' +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUniversity() {
+        return university;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUniversity(String university) {
+        this.university = university;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
